@@ -7,10 +7,10 @@ using namespace std;
 
 #define MAX_SIZE 20000
 #define KEY_RANGE 2000
-#define WZ_RANGE 20
+#define WZ_RANGE 200
 
 unordered_multimap<string,pair<int,int>> data;
-
+#define BANERRORUPDATE false
 
 bool v[MAX_SIZE];
 string s[MAX_SIZE];
@@ -164,7 +164,7 @@ void beginmultitest(interface* thistest)
             w2 = rand()%WZ_RANGE;
             sk = randomstring(k);
             memcpy(tac,sk.data(),sk.length());
-            can=thistest->update(tac,sk.length(),w1,w2,w1+1,w2+1);
+
 
             range = data.equal_range(sk);
             ss = 0;
@@ -175,6 +175,11 @@ void beginmultitest(interface* thistest)
                     ss = -1;
                 }
                 //cout<<x.first<<' '<<x.second.first<<' '<<x.second.second<<endl;
+            }
+            if (ss==-1 && BANERRORUPDATE)
+            {
+                i--;
+                break;
             }
             if (ss!=-1)
             {
@@ -188,9 +193,13 @@ void beginmultitest(interface* thistest)
                 }
                 //cout<<x.first<<' '<<x.second.first<<' '<<x.second.second<<endl;
             }
-            } else ss = 0;
+            } else
+            {
+                //cout<<"error update occured"<<endl;
+                ss = 0;
+            }
             //int ss = nowdata.count(make_pair(sk,make_pair(w1,w2)));
-
+            can=thistest->update(tac,sk.length(),w1,w2,w1+1,w2+1);
             if ((ss == 1 && can) || (ss == 0 && !can)) rightcommand++;
             else
             {
