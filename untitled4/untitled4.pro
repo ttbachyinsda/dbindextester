@@ -11,8 +11,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     interface.cpp \
-    naivedb.cpp
+    naivedb.cpp \
+    naivemultidb.cpp
 
 HEADERS += \
     interface.h \
-    naivedb.h
+    naivedb.h \
+    naivemultidb.h
